@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "2.0",
+  "description": "Install nginx",
+  "parameters": {
+    "version": {
+      "description": "Nginx Version",
+      "type": "String",
+      "default": "1.12"
+    },
+    "owner": {
+      "description": "Owner",
+      "type": "String",
+      "default": "ec2-user"
+    }
+  },
+  "mainSteps": [
+    {
+      "action": "aws:runShellScript",
+      "name": "runShellScript",
+      "inputs": {
+        "runCommand": [
+          "amazon-linux-extras enable nginx{{version}}",
+          "yum install nginx{{version}} -y",
+          "service nginx start"
+        ]
+      }
+    }
+  ]
+}
